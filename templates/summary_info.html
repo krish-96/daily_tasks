@@ -1,0 +1,39 @@
+<div class="col-12">
+    <!--  Summary Start-->
+<h2 class="text-center mb-2" style="background:#124fb161;">
+    Summary Format
+  </h2>
+<!--    Team Member	Jira Tkt	Jira Tkt Name	Description	Environment	Type 	Assign Date	Start Date	End Date	Status	Remarks-->
+  <table class="table table-hover border border-secondary border-3 mt-3 px-3" style="font-family: calibri;">
+    <thead>
+      <tr class="text-center">
+        <th class="bg-dark text-light">Team Member</th>
+        <th class="bg-dark text-light">Jira ID</th>
+        <th class="bg-dark text-light">Jira Tkt Name</th>
+        <th class="bg-dark text-light w-25">Description</th>
+        <th class="bg-dark text-light">Status</th>
+<!--        <th class="bg-dark text-light">Remarks</th>-->
+<!--        <th class="bg-dark text-light">Environment</th>-->
+<!--        <th class="bg-dark text-light w-50">Type</th>-->
+<!--        <th class="bg-dark text-light">Assign Date</th>-->
+<!--        <th class="bg-dark text-light">Start Date</th>-->
+<!--        <th class="bg-dark text-light">Start Date</th>-->
+<!--        <th class="bg-dark text-light">End Date</th>-->
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in tickets %}
+      <tr>
+<!--        <td class="text-center">{{forloop.counter}}</td>-->
+        <td class="text-center">{{user}}</td>
+        <td>ID</td>
+        <td>{{ticket.title}}</td>
+        <td>{{ticket.title}}</td>
+        <td>{{ticket.status}}</td>
+<!--        <td>{{ticket.title}}</td>-->
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

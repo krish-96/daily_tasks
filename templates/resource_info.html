@@ -1,0 +1,34 @@
+<div class="col-12">
+    <!--  Resource Start-->
+<h2 class="text-center mb-2" style="background:#003ee654;">
+    Resource Format
+  </h2>
+  <table class="table table-hover border border-secondary border-3 mt-3 px-3"  style="font-family: calibri;">
+    <thead>
+      <tr class="text-center">
+        <th class="bg-dark text-light">Date</th>
+        <th class="bg-dark text-light">Stream</th>
+        <th class="bg-dark text-light">TicketId</th>
+        <th class="bg-dark text-light w-50">Title</th>
+        <th class="bg-dark text-light">Resource Name</th>
+        <th class="bg-dark text-light w-50">Description</th>
+        <th class="bg-dark text-light">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in tickets %}
+      <tr>
+<!--        <td class="text-center">{{forloop.counter}}</td>-->
+        <td class="text-center">{{date}}</td>
+        <td>{{ticket.user.stream.name}}</td>
+        <td>ID</td>
+        <td>{{ticket.title}}</td>
+        <td>{{ticket.user.user.username}}</td>
+        <td>{{ticket.title}}</td>
+        <td>{{ticket.status}}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

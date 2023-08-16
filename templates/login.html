@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Daily Tasks | LogIn {% endblock %} {% block heading %} LogIn  {% endblock %}
+{% block left_content %}
+<div class="card">
+    <h3 class="card-title text-center bg-info">Welcome!</h3>
+    <div style="display: flex;
+                                align-content: center;
+                                justify-content: center;
+                                align-items: center;">
+        <p class="card-body">
+            Please login to create, view and edit today's tickets ...!<br/>
+            <span style="display: block;text-align:center;font-weight:900;margin-top:15px;">{{date}}</span></p>
+    </div>
+
+
+</div>
+{% endblock %}
+{% block content %}
+<!--<h2 class="text-center bg-warning">LogIn</h2>-->
+<form class="form mx-5" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">UserName</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password">
+    </div>
+    <button type="submit" class="btn btn-primary w-100 mt-4">LogIn</button>
+</form>
+
+
+{% endblock %}

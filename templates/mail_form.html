@@ -1,0 +1,31 @@
+
+<div>
+        <h2 class="text-center mb-2" style="background:#003ee654;">
+    Mail Details
+  </h2>
+    <p class="m-3">Please provide the list of email addresses to send the tickets. </p>
+    <form class="form mx-5" action="/send_mail/" method="POST">
+
+    {% csrf_token %}
+    <div class="mb-2 d-flex align-items-center justify-content-center">
+    <label for="from_mail" class="form-label w-25">From <span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="from_mail" name="from_mail" placeholder="From Address" value={% if request.user.email %} {{request.user.email}} {% else %} "@gmail.com" {% endif %}  required>
+    </div>
+    <div class="mb-2 d-flex align-items-center justify-content-center">
+        <label for="to_list" class="form-label w-25">To <span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="to_list" name="to_list" placeholder="To Address" value="@gmail.com" multiple required>
+    </div>
+    <div class="mb-2 d-flex align-items-center justify-content-center">
+        <label for="cc_list" class="form-label w-25">CC</label>
+        <input type="email" class="form-control" id="cc_list" name="cc_list" placeholder="CC List">
+    </div>
+    <div class="mb-2 d-flex align-items-center justify-content-center">
+        <label for="bcc_list" class="form-label w-25">BCC</label>
+        <input type="email" class="form-control" id="bcc_list" name="bcc_list" placeholder="BCC List">
+    </div>
+            <input type="checkbox" class="form-check-input" id="consent" name="consent" required>
+            <label for="consent" class="form-check-label w-25">All the tickets are verified??</label>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Send Email</button>
+
+</form>
+</div>

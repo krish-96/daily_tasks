@@ -1,0 +1,205 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Tickets | Create |
+Update | Delete {% endblock %} {% block heading %} Your Tickets on {{date}}
+{% endblock %} {% block left_content %}
+<!--<div class="card bg-secondary text-light">-->
+<div style="background: #b7b3b37d;
+    box-shadow: 0 0 10px 6px #9cc5cd;
+    color: #000000f7;
+    font-family: 'Alegreya', serif;">
+    <h3 class="text-center" style="padding-top: 20px;">Hi {{request.user}}!</h3>
+    <h6 class="text-center px-4" style="color:#ad0cddb3">({{stream.stream.name}} @ {{stream.project.name}})</h6>
+    <div class="p-2">
+
+    <span class="d-block m-2 p-2"><span class="d-block mb-2 ">Add your tickets!</span>Note:
+    <ul class="m-0">
+      <li>You have full access to Add, Edit and Delete tickets.</li>
+      <li>You can see the tickets added by yourself.</li>
+      <li>You can Edit tickets before submitting the mail.</li>
+      <li>Once mail has sent, you can't view the tickets.</li>
+      <li>
+        If you have any tickets to delete, Please delete them before submitting the
+        mail.
+      </li>
+    </ul></span>
+
+    </div>
+</div>
+{% endblock %} {% block content %}
+<h2 class="text-center mb-0" style="background:#404bbb7a;">Create a Ticket</h2>
+<div class="form border border-3 p-3" style="border-bottom: 2px solid black !important;">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group mt-3">
+            <label for="title" class="form-label">Ticket Title:</label>
+            <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+                    class="form-control"
+            />
+        </div>
+        <div class="form-group mt-3">
+            <label for="status" class="form-label">Status:</label>
+            <div style="display: flex; gap: 5px">
+                <select
+                        id="status"
+                        name="status"
+                        required
+                        class="form-control w-50 ml-0"
+                        style="margin-right: 3rem !important"
+                >
+                    <option value="in_progress">In Progress</option>
+                    <option value="done">Done</option>
+                </select>
+                <button
+                        type="reset"
+                        class="btn btn-secondary btn-sm text-center"
+                        style="width: 25%"
+                >
+                    Cancel
+                </button>
+                <button
+                        type="submit"
+                        class="btn btn-primary btn-sm text-center"
+                        style="width: 25%"
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col mt-5">
+    {% if tickets %}
+    <h2 class="text-center mb-2" style="background:#4451ab78;">
+        Existing tickets
+    </h2>
+    {% include 'tickets_template.html' %}
+    {% else %}
+    <p class="alert alert-warning text-center text-dark">
+        <i
+        >No Tickets Created Today(<span>{{date}}</span>)! Fill the above form to
+            create one.</i
+        >
+    </p>
+    {% endif %}
+</div>
+<div id="details" style="display:none;position:fixed; top:0;left:0;width:100%;height:100%;background:#bcb1b1;">
+    <div id="detail-content" style="justify-content: center;
+    align-items: center;
+    display: flex;" class="">
+        <div style="width: 100%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        height: 80vh;">
+            <form class="form mx-5 w-50" method="POST" style="padding: 15px 25px;
+          background: #ffffff82;display: flex;
+          flex-direction: column;
+          justify-content: center;
+      box-shadow: 1px 9px 15px 6px #161616fc;
+          border-radius: 10px;">
+                <h2 class="text-center" style="width: 100%; color:black;">Ticket Details
+                    <hr style="color:black;border: 2px solid black;">
+                </h2>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="detail-title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="detail-title" name="detail-title">
+                    <input type="number" style="display:none;" class="form-control" id="detail-id" name="ticket_id">
+                </div>
+                <div class="mb-3">
+                    <label for="detail-status" class="form-label">Status</label>
+
+                    <div style="display: flex; gap: 5px">
+                        <select
+                                name="detail-status"
+                                id="detail-status"
+                                required
+                                class="form-control w-25 ml-0"
+                                style="margin-right: 3rem !important"
+                        >
+                            <option value="in_progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                        <button
+                                type="button"
+                                class="btn btn-secondary btn-sm text-center"
+                                style="width: 25%"
+                                onclick="contentClose()"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                                type="submit"
+                                class="btn btn-primary btn-sm text-center"
+                                style="width: 25%"
+                        >
+                            Update
+                        </button>
+
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function get_skeleton(movie){
+      const element = document.getElementById('details');
+      console.log('element style changed')
+      // Get a reference to the parent <div>
+      const detail_status = document.getElementById('detail-status');
+      const detail_title = document.getElementById('detail-title');
+      const detail_id = document.getElementById('detail-id');
+      detail_title.value = movie.title
+      detail_status.value = movie.status
+      detail_id.value = movie.id
+      element.style.display = 'block';
+
+    };
+
+    async function details(id, req_type = "update") {
+      console.log(id);
+      if (req_type == "update") {
+      const ticketUrl = `${window.location.origin}/ticket_detail/${id}/`
+        console.log(req_type, ticketUrl);
+        const response = await fetch(ticketUrl);
+        const movie = await response.json();
+        if (movie) {
+          console.log('element has come to change style')
+          get_skeleton(movie)
+        }
+        console.log(movie);
+      } else if (req_type == "delete") {
+        <!--        fetch(window.location.-->
+        console.log(req_type);
+        if (window.confirm("Are you sure to delete?")){
+                const ticketUrl = `${window.location.origin}/ticket_delete/${id}/`
+        const response = await fetch(ticketUrl);
+        const movie = await response.json();
+        console.log(req_type);
+        window.location.reload();
+        }
+      }
+    }
+
+    function contentClose(){
+    console.log('contentClose');
+    const element = document.getElementById('details');
+    const parentDiv = document.getElementById('detail-content');
+  <!--  parentDiv.innerHTML = '';-->
+    element.style.display = 'none';
+
+    }
+</script>
+{% endblock %}
+
+{% block bottom_content %}
+{% if tickets %}
+{% include 'resource_info.html' %}
+{% include 'summary_info.html' %}
+{% endif %}
+{% endblock %}
