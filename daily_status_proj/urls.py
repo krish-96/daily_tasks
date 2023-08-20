@@ -28,3 +28,8 @@ urlpatterns = [
     path('login/', ds_views.login_view, name='login'),
     path('logout/', ds_views.logout_view, name='logout'),
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -5,3 +5,5 @@ __pycache__/
 .idea/*
 media/
 db.sqlite3
+
+proj_setting.py

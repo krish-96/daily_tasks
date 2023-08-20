@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ticket, Stream, UserProfile, Project, MailsTrack
+from .models import Ticket, Stream, UserProfile, Project, MailsTrack, TicketsLog
 
 
 # Register your models here.
@@ -51,6 +51,11 @@ class TicketAdmin(admin.ModelAdmin):
     list_display = ['created_time', 'updated_time', 'title', 'status', 'user']
     # list_display = ['title', 'status', 'user']
 
+class TicketsLogAdmin(admin.ModelAdmin):
+    model = TicketsLog
+    list_display = ['created_time', 'updated_time', 'created_by']
+    # list_display = ['title', 'status', 'user']
+
 
 class MailsTrackAdmin(admin.ModelAdmin):
     model = MailsTrack
@@ -78,3 +83,4 @@ admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Stream, StreamAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(MailsTrack, MailsTrackAdmin)
+admin.site.register(TicketsLog, TicketsLogAdmin)

@@ -92,8 +92,40 @@ def get_details(pk):
         return None
 
 
+
+
+
+
+
+
+def update_in_db(user_id):
+    try:
+        import psycopg2
+        from daily_status_proj.settings import DATABASES
+        db_creds = DATABASES.get('default')
+        # DATABASE CONFIGURATIONS
+        DATABASE = db_creds.get('NAME')
+        USER = db_creds.get('USER')
+        PASSWORD = db_creds.get("PASSWORD")
+        HOST = db_creds.get("HOST")
+        PORT = db_creds.get("PORT")
+        def initial_db():
+            return psycopg2.connect(host=HOST, port=PORT, dbname=DATABASE, user=USER, password=PASSWORD)
+
+        print(f"{'%'*100} \n update_in_db is called!")
+        db_connection = initial_db()
+        cursor = db_connection.cursor()
+        print("Update is in progress...")
+        cursor.execute(f"update ds_app_ticketslog set created_by_id ={user_id} where id=39;")
+        db_connection.commit()
+        print(f"Update is completed successfully...! \n {'%'*100}")
+    except Exception as e:
+        print('Exception @ update_in_db => ', e)
+
+
 @check_authentication
 def home(request):
+
     print(2)
 
     if request.method == 'POST':
@@ -102,8 +134,17 @@ def home(request):
             title = request.POST.get('title')
             status = request.POST.get('status')
             print(f"title : {title} ==> status {status}")
-            Ticket.objects.create(title=title, status=status, user=UserProfile.objects.get(user=request.user))
+            # Ticket.objects.create(title=title, status=status, user=UserProfile.objects.get(user=request.user))
+            query=f"insert into ds_app_ticketslog (created_time, updated_time, created_by_id) values ('2023-08-19 07:18:54.652 +0530', '2023-08-19 07:18:54.652 +0530', {request.user.id})"
+            from django.db import connection
+            with connection.cursor() as cursor:
+                from django.utils import timezone
+                import time
+                cursor.execute(query)
+                connection.commit()
+
             messages.success(request, f"Ticket Title : {title} & Status {status} was created successfully.")
+            # update_in_db(request.user.id)
             # return redirect("home")
         elif request.POST.get('ticket_id'):
             print(4)

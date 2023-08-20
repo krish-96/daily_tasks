@@ -54,3 +54,11 @@ class MailsTrack(models.Model):
 
     def __str__(self):
         return f"Mail : {'Yes' if self.is_mail_sent == True else 'No'}"
+
+class TicketsLog(models.Model):
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return f"Created by : {self.created_by.username}"
