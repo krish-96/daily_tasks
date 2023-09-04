@@ -8,11 +8,11 @@ permissions:
    owner: ubuntu
    group: ubuntu
 hooks:
- BeforeInstall:
-   - location: config/BeforeInstall.sh
-     timeout: 400
-     runas: ubuntu
- AfterInstall:
-   - location: config/AfterInstall.sh
-     timeout: 600
-     runas: ubuntu
+# BeforeInstall:
+#   - location: config/BeforeInstall.sh
+#     timeout: 400
+#     runas: ubuntu
+# AfterInstall:
+#   - location: config/AfterInstall.sh
+#     timeout: 600
+#     runas: ubuntu
