@@ -9,10 +9,10 @@ permissions:
    group: ubuntu
 hooks:
  BeforeInstall:
-   - location: /home/ubuntu/DailyStatus/config/BeforeInstall.sh
+   - location: config/BeforeInstall.sh
      timeout: 400
      runas: ubuntu
  AfterInstall:
-   - location: /home/ubuntu/DailyStatus/config/AfterInstall.sh
+   - location: config/AfterInstall.sh
      timeout: 600
      runas: ubuntu
