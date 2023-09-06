@@ -8,13 +8,16 @@ echo "File copied from S3"
 #virtualenv env -p /usr/bin/python3.8
 
 
-#/usr/bin/python3.10 -m venv venv
-python3 -m venv venv
-
-# Activate virtual env
-source venv/bin/activate
+##/usr/bin/python3.10 -m venv venv
+#echo "Creating Venv"
+#python3 -m venv venv
+#
+## Activate virtual env
+#echo "Activating Venv"
+#source venv/bin/activate
 
 # Install dependencies
+echo "Installing the dependencies"
 pip install -r requirements.txt
 
 # Manager commands
