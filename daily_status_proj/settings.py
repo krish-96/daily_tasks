@@ -79,8 +79,7 @@ WSGI_APPLICATION = 'daily_status_proj.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 try:
-    from .proj_setting1 import *
-    DATABASES=DATABASES
+    from .dalily_app_settings import *
 except Exception:
     DATABASES = {
         'default': {

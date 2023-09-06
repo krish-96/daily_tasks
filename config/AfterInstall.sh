@@ -3,6 +3,7 @@
 script_dir='/home/ubuntu/DailyStatus'
 cd $script_dir
 
+aws s3 cp s3://daily-status-app-settings/dalily_app_settings.py /home/ubuntu/DailyStatus/daily_status_proj
 
 #virtualenv env -p /usr/bin/python3.8
 
