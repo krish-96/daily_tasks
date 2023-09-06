@@ -3,8 +3,8 @@
 script_dir='/home/ubuntu/DailyStatus'
 cd $script_dir
 
-aws s3 cp s3://daily-status-app-settings/dalily_app_settings.py /home/ubuntu/DailyStatus/daily_status_proj
-
+aws s3 cp s3://daily-status-app-settings/dalily_app_settings.py /home/ubuntu/DailyStatus/daily_status_proj/dalily_app_settings.py
+echo "File copied from S3"
 #virtualenv env -p /usr/bin/python3.8
 
 /usr/bin/python3.8 -m venv venv
