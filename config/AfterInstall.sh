@@ -14,8 +14,8 @@ python3 -m venv venv
 
 # Activate virtual env
 echo "Activating Venv"
+pwd
 source venv/bin/activate
-
 # Install dependencies
 echo "Installing the dependencies"
 pip install -r requirements.txt
