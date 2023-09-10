@@ -12,7 +12,6 @@ from .decorators import  check_authentication, check_superadmin_authentication
 # Create your views here.
 
 
-@check_authentication
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
