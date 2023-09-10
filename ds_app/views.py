@@ -12,6 +12,7 @@ from .decorators import  check_authentication, check_superadmin_authentication
 # Create your views here.
 
 
+@check_authentication
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -48,6 +49,7 @@ def login_view(request):
     return render(request, 'login.html', context=context)
 
 
+@check_authentication
 def logout_view(request):
     if request.user.is_authenticated:
         messages.success(request, f"Hi {request.user.username}! You're logged out now!")
@@ -94,9 +96,6 @@ def get_details(pk):
 
 @check_authentication
 def home(request):
-
-    print(2)
-
     if request.method == 'POST':
         print(3)
         if  not request.POST.get('ticket_id'):
