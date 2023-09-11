@@ -29,4 +29,6 @@ python3 manage.py collectstatic --no-input
 #python3 manage.py runserver 0.0.0.0:9999
 
 
-gunicorn --workers 1 --bind 0.0.0.0:9999 daily_status_proj.wsgi:application
+echo "Running the gunicorn from externat file"
+sh start.sh
+#gunicorn --workers 1 --bind 0.0.0.0:9999 daily_status_proj.wsgi:application
