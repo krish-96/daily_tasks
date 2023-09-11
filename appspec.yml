@@ -10,9 +10,9 @@ permissions:
 hooks:
  BeforeInstall:
    - location: config/BeforeInstall.sh
-     timeout: 400
+     timeout: 100
      runas: ubuntu
  AfterInstall:
    - location: config/AfterInstall.sh
-     timeout: 400
+     timeout: 100
      runas: ubuntu
