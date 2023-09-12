@@ -28,7 +28,11 @@ python3 manage.py migrate --no-input
 python3 manage.py collectstatic --no-input
 #python3 manage.py runserver 0.0.0.0:9999
 
+echo "Running the server in background"
+nohup gunicorn --workers 1 --bind 0.0.0.0:9999 daily_status_proj.wsgi:application > /dev/null 2>&1 &
 
-echo "Running the gunicorn from externat file"
-sh config/start.sh
+
+
+#echo "Running the gunicorn from externat file"
+#sh config/start.sh
 #gunicorn --workers 1 --bind 0.0.0.0:9999 daily_status_proj.wsgi:application
