@@ -16,3 +16,6 @@ hooks:
    - location: config/AfterInstall.sh
      timeout: 100
      runas: ubuntu
+ ApplicationStart:
+   - location: config/AfterInstall.sh
+     runas: ubuntu
